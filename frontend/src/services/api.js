@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+// Automatically use Render URL in production, localhost in development
+const API_URL = process.env.NODE_ENV === 'production'
+  ? 'https://testproject-qxlj.onrender.com'
+  : 'http://localhost:10000';
 
 const api = axios.create({
   baseURL: `${API_URL}/api/registrations`,
