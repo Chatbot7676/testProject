@@ -82,7 +82,21 @@
 .filters-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  gap: 20px;
+}
+
+.filter-with-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-with-label label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .filter-input {
@@ -91,11 +105,22 @@
   border-radius: 8px;
   font-size: 14px;
   transition: border-color 0.3s;
+  width: 100%;
 }
 
 .filter-input:focus {
   outline: none;
   border-color: #2196f3;
+}
+
+.date-input {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .clear-button {
