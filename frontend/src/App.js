@@ -13,7 +13,11 @@ function App() {
         <nav className="navbar">
           <div className="nav-container">
             <div className="nav-logo">
-              <h1>🎓 Class Scheduler</h1>
+              <div className="logo-icon">🚗</div>
+              <div className="logo-text">
+                <h1>Excellence Driving</h1>
+                <p className="tagline">NO.1 DRIVING SCHOOL IN UAE</p>
+              </div>
             </div>
             <div className="nav-links">
               <Link to="/" className="nav-link">
@@ -26,7 +30,7 @@ function App() {
                 👨‍🏫 Instructors
               </Link>
               <Link to="/upload" className="nav-link">
-                📤 Upload CSV
+                📤 Upload Schedule
               </Link>
             </div>
           </div>
@@ -42,7 +46,28 @@ function App() {
         </main>
 
         <footer className="footer">
-          <p>© 2025 Class Scheduling System | Created by Abdulla Azizulla</p>
+          <div className="footer-content">
+            <div className="footer-section">
+              <h3>Excellence Driving</h3>
+              <p>NO.1 DRIVING SCHOOL IN UAE</p>
+              <p>PO Box - 446241</p>
+              <p>Al Qusais Industrial Area - 5</p>
+              <p>Dubai, United Arab Emirates</p>
+            </div>
+            <div className="footer-section">
+              <h3>Contact</h3>
+              <p>📞 600515154</p>
+              <p>✉️ info@excellencedriving.com</p>
+            </div>
+            <div className="footer-section">
+              <h3>Quick Links</h3>
+              <p>Car License | Motorcycle License</p>
+              <p>Heavy Bus | Heavy Truck</p>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>© 2025 Excellence Driving School. All Rights Reserved | Created by Abdulla Azizulla</p>
+          </div>
         </footer>
       </div>
     </Router>

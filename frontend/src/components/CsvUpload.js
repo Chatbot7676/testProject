@@ -54,9 +54,9 @@ function CsvUpload() {
   return (
     <div className="csv-upload-container">
       <div className="upload-card">
-        <h2>📤 Upload Class Schedule CSV</h2>
+        <h2>📤 Upload Driving Class Schedule</h2>
         <p className="description">
-          Upload a CSV file with columns: Registration ID, Student ID, Instructor ID, Class ID, Class Start Time, Action
+          Upload a CSV file with driving lesson schedules. Columns: Registration ID, Student ID, Instructor ID, Class ID, Class Start Time, Action
         </p>
 
         <div className="upload-section">

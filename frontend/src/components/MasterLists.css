@@ -1,5 +1,6 @@
+/* Excellence Driving - Master Lists - Blue & Gold Theme */
 .master-list-container {
-  padding: 20px;
+  padding: 24px;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -16,25 +17,36 @@
 .master-list-header h2 {
   margin: 0;
   font-size: 32px;
-  color: #333;
+  color: var(--primary);
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
 }
 
 .header-stats {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .stat-badge {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   color: white;
   padding: 10px 20px;
   border-radius: 20px;
   font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.stat-badge:hover {
+  transform: translateY(-2px);
 }
 
 .stat-badge strong {
   font-size: 18px;
   margin-left: 5px;
+  font-weight: 700;
 }
 
 .search-section {
@@ -50,13 +62,15 @@
   border: 2px solid #e0e0e0;
   border-radius: 10px;
   font-size: 16px;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  font-family: 'Open Sans', sans-serif;
+  background: var(--white);
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.1);
 }
 
 .clear-search {
@@ -68,7 +82,8 @@
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .clear-search:hover {
@@ -81,40 +96,44 @@
   text-align: center;
   padding: 60px 20px;
   font-size: 24px;
-  color: #666;
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
 }
 
 .empty-state {
   text-align: center;
   padding: 80px 20px;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
 }
 
 .empty-state p {
   font-size: 24px;
-  color: #666;
+  color: var(--text);
   margin: 0 0 10px 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .empty-state small {
   color: #999;
   font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
+  gap: 24px;
 }
 
 .master-card {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
   border: 2px solid transparent;
   display: flex;
   align-items: flex-start;
@@ -123,14 +142,15 @@
 
 .master-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border-color: #667eea;
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
 }
 
 .card-icon {
   font-size: 48px;
   line-height: 1;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .card-content {
@@ -140,9 +160,11 @@
 
 .card-content h3 {
   margin: 0 0 15px 0;
-  color: #333;
+  color: var(--primary);
   font-size: 20px;
   word-wrap: break-word;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
 }
 
 .card-details {
@@ -158,12 +180,13 @@
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .detail-value {
   font-size: 16px;
-  color: #667eea;
-  font-weight: 600;
+  color: var(--primary);
+  font-weight: 700;
   font-family: 'Courier New', monospace;
 }
 
@@ -175,19 +198,23 @@
 .timestamp {
   font-size: 12px;
   color: #999;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* Instructor-specific styling */
 .instructor-card {
-  background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+  border-left: 4px solid var(--accent);
 }
 
 .instructor-card:hover {
-  border-color: #764ba2;
+  border-color: var(--accent);
+  box-shadow: 0 8px 25px rgba(255, 195, 0, 0.2);
 }
 
 .instructor-card .detail-value {
-  color: #764ba2;
+  color: var(--accent);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Design */

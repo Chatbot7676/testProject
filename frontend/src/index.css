@@ -1,13 +1,54 @@
+/* Excellence Driving - Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f9f9f9;
+  color: #333333;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Scrollbar styling - Excellence Driving Blue & Gold theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f7fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #002b5c, #ffc300);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #001f40, #ffc300);
+}
+
+/* CSS Variables for Excellence Driving Theme */
+:root {
+  --primary: #002b5c;
+  --accent: #ffc300;
+  --background: #f9f9f9;
+  --text: #333333;
+  --hover: #001f40;
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --border-radius: 12px;
+  --shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0px 4px 16px rgba(0, 0, 0, 0.15);
 }

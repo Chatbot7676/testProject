@@ -175,7 +175,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <h2>📊 Class Scheduling Dashboard</h2>
+      <h2>📊 Excellence Driving - Class Scheduling Dashboard</h2>
 
       {/* Statistics Cards */}
       <div className="stats-grid">
@@ -199,30 +199,69 @@ function Dashboard() {
 
       {/* Classes Per Day Chart */}
       <div className="chart-section">
-        <h3>📈 Classes Per Day</h3>
+        <h3>📈 Driving Lessons Per Day</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={classesPerDay}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" angle={-45} textAnchor="end" height={80} />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+            <XAxis 
+              dataKey="date" 
+              angle={-45} 
+              textAnchor="end" 
+              height={80}
+              style={{ fontSize: '12px', fill: '#333' }}
+            />
+            <YAxis style={{ fontSize: '12px', fill: '#333' }} />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: '#fff', 
+                border: '2px solid #002b5c',
+                borderRadius: '8px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+              }}
+            />
             <Legend />
-            <Line type="monotone" dataKey="classes" stroke="#2196f3" strokeWidth={2} />
+            <Line 
+              type="monotone" 
+              dataKey="classes" 
+              stroke="#002b5c" 
+              strokeWidth={3} 
+              name="Lessons"
+              dot={{ fill: '#ffc300', r: 5 }}
+              activeDot={{ r: 7, fill: '#ffc300' }}
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
       {/* Instructor Stats Chart */}
       <div className="chart-section">
-        <h3>👨‍🏫 Classes Per Instructor</h3>
+        <h3>👨‍🏫 Driving Lessons Per Instructor</h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={instructorStats}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+            <XAxis 
+              dataKey="name" 
+              angle={-45} 
+              textAnchor="end" 
+              height={100}
+              style={{ fontSize: '12px', fill: '#333' }}
+            />
+            <YAxis style={{ fontSize: '12px', fill: '#333' }} />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: '#fff', 
+                border: '2px solid #002b5c',
+                borderRadius: '8px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+              }}
+            />
             <Legend />
-            <Bar dataKey="classes" fill="#4caf50" />
+            <Bar 
+              dataKey="classes" 
+              fill="#002b5c" 
+              name="Lessons"
+              radius={[8, 8, 0, 0]}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -70,7 +70,7 @@ function Students() {
           <small>
             {searchTerm
               ? 'Try a different search term'
-              : 'Click "Seed Database" to add sample students'}
+              : 'No students found'}
           </small>
         </div>
       ) : (
