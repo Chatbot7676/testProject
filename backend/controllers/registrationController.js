@@ -5,7 +5,6 @@ import Student from "../models/Student.js";
 import Instructor from "../models/Instructor.js";
 import ClassType from "../models/ClassType.js";
 
-// Seed database with sample data
 export const seedData = async (req, res) => {
   try {
     console.log("🌱 Starting database seeding...");
@@ -47,7 +46,6 @@ export const seedData = async (req, res) => {
       }
     }
 
-    // Create Students
     const students = await Student.insertMany([
       { studentId: "123", name: "John Doe" },
       { studentId: "124", name: "Jane Smith" },
@@ -57,7 +55,6 @@ export const seedData = async (req, res) => {
     ]);
     console.log(`✅ Created ${students.length} students`);
 
-    // Create Instructors
     const instructors = await Instructor.insertMany([
       { instructorId: "111", name: "Professor Smith" },
       { instructorId: "101", name: "Dr. Johnson" },
@@ -67,7 +64,6 @@ export const seedData = async (req, res) => {
     ]);
     console.log(`✅ Created ${instructors.length} instructors`);
 
-    // Create Class Types
     const classTypes = await ClassType.insertMany([
       { classTypeId: "1", name: "Yoga Basics" },
       { classTypeId: "2", name: "Advanced Pilates" },
@@ -94,7 +90,6 @@ export const seedData = async (req, res) => {
   }
 };
 
-// Get all data
 export const getAllData = async (req, res) => {
   try {
     const students = await Student.find();
@@ -122,7 +117,6 @@ export const getAllData = async (req, res) => {
   }
 };
 
-// Add a student
 export const addStudent = async (req, res) => {
   try {
     const { studentId, name } = req.body;
@@ -133,7 +127,6 @@ export const addStudent = async (req, res) => {
   }
 };
 
-// Add an instructor
 export const addInstructor = async (req, res) => {
   try {
     const { instructorId, name } = req.body;
@@ -144,7 +137,6 @@ export const addInstructor = async (req, res) => {
   }
 };
 
-// Add a class type
 export const addClassType = async (req, res) => {
   try {
     const { classTypeId, name } = req.body;
@@ -155,7 +147,6 @@ export const addClassType = async (req, res) => {
   }
 };
 
-// Helper function to parse date and time
 const parseDateTime = (dateStr, timeStr) => {
   try {
     // Handle formats like "10/8/2024 13:00" or separate date and time
@@ -176,26 +167,22 @@ const parseDateTime = (dateStr, timeStr) => {
   }
 };
 
-// Helper function to calculate end time
 const calculateEndTime = (startDateTime, duration) => {
   const endTime = new Date(startDateTime);
   endTime.setMinutes(endTime.getMinutes() + duration);
   return endTime;
 };
 
-// Helper function to check if two time slots overlap
 const timeSlotsOverlap = (start1, end1, start2, end2) => {
   return start1 < end2 && start2 < end1;
 };
 
-// Helper function to get start of day
 const getStartOfDay = (date) => {
   const start = new Date(date);
   start.setHours(0, 0, 0, 0);
   return start;
 };
 
-// Helper function to get end of day
 const getEndOfDay = (date) => {
   const end = new Date(date);
   end.setHours(23, 59, 59, 999);
@@ -216,13 +203,11 @@ export const uploadCSV = async (req, res) => {
     const results = [];
     const filePath = req.file.path;
 
-    // Read first line to detect delimiter
     const firstLine = fs.readFileSync(filePath, 'utf-8').split('\n')[0];
     const delimiter = firstLine.includes('\t') ? '\t' : ',';
     
     console.log(`📊 Detected delimiter: ${delimiter === '\t' ? 'TAB' : 'COMMA'}`);
 
-    // Get configuration from environment variables
     const CLASS_DURATION = parseInt(process.env.CLASS_DURATION) || 45;
     const MAX_STUDENT_CLASSES = parseInt(process.env.MAX_STUDENT_CLASSES) || 3;
     const MAX_INSTRUCTOR_CLASSES = parseInt(process.env.MAX_INSTRUCTOR_CLASSES) || 5;
@@ -230,7 +215,6 @@ export const uploadCSV = async (req, res) => {
 
     console.log(`⚙️  Configuration: Duration=${CLASS_DURATION}min, MaxStudent=${MAX_STUDENT_CLASSES}, MaxInstructor=${MAX_INSTRUCTOR_CLASSES}, MaxClassType=${MAX_CLASS_TYPE_CLASSES}`);
 
-    // Parse the CSV file with detected delimiter
     fs.createReadStream(filePath)
       .pipe(csv({ separator: delimiter }))
       .on("data", (data) => {
@@ -244,7 +228,6 @@ export const uploadCSV = async (req, res) => {
         const responses = [];
 
         for (const row of results) {
-          // Helper function to clean values (treat "null", "NULL", "Null" as empty)
           const cleanValue = (val) => {
             if (!val) return "";
             const cleaned = String(val).trim();
@@ -264,13 +247,11 @@ export const uploadCSV = async (req, res) => {
 
           try {
             if (action === "new") {
-              // Parse date and time
               const classStartDateTime = parseDateTime(dateStr, startTimeStr);
               const classEndDateTime = calculateEndTime(classStartDateTime, CLASS_DURATION);
               
               console.log(`📅 Class time: ${classStartDateTime.toISOString()} to ${classEndDateTime.toISOString()}`);
 
-              // Validate instructor exists (required)
               const instructorExists = await Instructor.findOne({ instructorId });
               if (!instructorExists) {
                 console.log(`❌ Invalid instructor: ${instructorId}`);
@@ -281,7 +262,6 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // Validate class type exists (required)
               const classTypeExists = await ClassType.findOne({ classTypeId });
               if (!classTypeExists) {
                 console.log(`❌ Invalid class type: ${classTypeId}`);
@@ -292,7 +272,6 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // Auto-create student if not exists (extra points feature)
               let studentExists = await Student.findOne({ studentId });
               if (!studentExists) {
                 console.log(`ℹ️  Student ${studentId} not found, creating new student`);
@@ -303,7 +282,6 @@ export const uploadCSV = async (req, res) => {
                 console.log(`✅ Auto-created student: ${studentId}`);
               }
 
-              // Check instructor time conflicts
               const dayStart = getStartOfDay(classStartDateTime);
               const dayEnd = getEndOfDay(classStartDateTime);
               
@@ -313,7 +291,6 @@ export const uploadCSV = async (req, res) => {
                 status: { $ne: "deleted" }
               });
 
-              // Check for instructor overlap
               let hasError = false;
               for (const existingSchedule of instructorSchedules) {
                 const existingStart = parseDateTime(existingSchedule.date.toISOString(), existingSchedule.startTime);
@@ -334,7 +311,6 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // Check instructor max classes per day
               if (instructorSchedules.length >= MAX_INSTRUCTOR_CLASSES) {
                 console.log(`❌ Instructor max classes exceeded`);
                 responses.push({
@@ -344,14 +320,12 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // Check student time conflicts
               const studentSchedules = await Schedule.find({
                 studentId,
                 date: { $gte: dayStart, $lte: dayEnd },
                 status: { $ne: "deleted" }
               });
 
-              // Check for student overlap
               for (const existingSchedule of studentSchedules) {
                 const existingStart = parseDateTime(existingSchedule.date.toISOString(), existingSchedule.startTime);
                 const existingEnd = calculateEndTime(existingStart, existingSchedule.duration || CLASS_DURATION);
@@ -371,7 +345,6 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // Check student max classes per day
               if (studentSchedules.length >= MAX_STUDENT_CLASSES) {
                 console.log(`❌ Student max classes exceeded`);
                 responses.push({
@@ -381,7 +354,6 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // Check class type max classes per day (extra points)
               const classTypeSchedules = await Schedule.find({
                 classTypeId,
                 date: { $gte: dayStart, $lte: dayEnd },
@@ -397,7 +369,6 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // All validations passed - create new schedule
               const newSchedule = new Schedule({
                 studentId,
                 instructorId,
@@ -426,7 +397,6 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // If updating time, validate conflicts
               let hasConflict = false;
               if (startTimeStr || dateStr) {
                 const newDateTime = parseDateTime(dateStr || schedule.date.toISOString(), startTimeStr || schedule.startTime);
@@ -435,12 +405,11 @@ export const uploadCSV = async (req, res) => {
                 const dayStart = getStartOfDay(newDateTime);
                 const dayEnd = getEndOfDay(newDateTime);
 
-                // Check instructor conflicts (if instructor is being updated or time is being updated)
                 const checkInstructorId = instructorId || schedule.instructorId;
                 const instructorSchedules = await Schedule.find({
                   instructorId: checkInstructorId,
                   date: { $gte: dayStart, $lte: dayEnd },
-                  registrationId: { $ne: registrationId }, // Exclude current schedule
+                  registrationId: { $ne: registrationId },
                   status: { $ne: "deleted" }
                 });
 
@@ -459,12 +428,11 @@ export const uploadCSV = async (req, res) => {
                 }
 
                 if (!hasConflict) {
-                  // Check student conflicts (if student is being updated or time is being updated)
                   const checkStudentId = studentId || schedule.studentId;
                   const studentSchedules = await Schedule.find({
                     studentId: checkStudentId,
                     date: { $gte: dayStart, $lte: dayEnd },
-                    registrationId: { $ne: registrationId }, // Exclude current schedule
+                    registrationId: { $ne: registrationId },
                     status: { $ne: "deleted" }
                   });
 
@@ -493,7 +461,6 @@ export const uploadCSV = async (req, res) => {
                 continue;
               }
 
-              // Validate instructor if being updated
               if (instructorId) {
                 const instructorExists = await Instructor.findOne({ instructorId });
                 if (!instructorExists) {
@@ -506,7 +473,6 @@ export const uploadCSV = async (req, res) => {
                 schedule.instructorId = instructorId;
               }
 
-              // Validate class type if being updated
               if (classTypeId) {
                 const classTypeExists = await ClassType.findOne({ classTypeId });
                 if (!classTypeExists) {
@@ -519,7 +485,6 @@ export const uploadCSV = async (req, res) => {
                 schedule.classTypeId = classTypeId;
               }
 
-              // Update student if provided
               if (studentId) {
                 schedule.studentId = studentId;
               }
@@ -539,7 +504,6 @@ export const uploadCSV = async (req, res) => {
                 console.log(`❌ Schedule not found for deletion: ${registrationId}`);
                 responses.push({ status: "error", message: `No schedule found with ID ${registrationId}` });
               } else {
-                // Mark as deleted instead of actually deleting (soft delete)
                 schedule.status = "deleted";
                 await schedule.save();
                 

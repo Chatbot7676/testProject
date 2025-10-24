@@ -14,7 +14,6 @@ import {
 } from 'recharts';
 import './Dashboard.css';
 
-// Helper function to format date as dd/mm/yyyy
 const formatDate = (dateStr) => {
   const date = new Date(dateStr);
   const day = String(date.getDate()).padStart(2, '0');
@@ -23,7 +22,6 @@ const formatDate = (dateStr) => {
   return `${day}/${month}/${year}`;
 };
 
-// Helper function to extract time only (HH:MM)
 const formatTime = (timeStr) => {
   if (!timeStr) return '';
   
@@ -86,7 +84,6 @@ function Dashboard() {
     );
   }
 
-  // Process data for charts
   const getClassesPerDay = () => {
     const classesByDate = {};
     
@@ -129,7 +126,6 @@ function Dashboard() {
     }));
   };
 
-  // Filter schedules based on filters
   const getFilteredSchedules = () => {
     return data.schedules?.filter((schedule) => {
       if (schedule.status === 'deleted') return false;

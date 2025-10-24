@@ -9,7 +9,6 @@ import registrationRoutes from "./routes/registrationRoutes.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load environment variables and connect to database
 dotenv.config();
 connectDB();
 
@@ -17,15 +16,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
 app.use("/api/registrations", registrationRoutes);
 
-// ---------- Serve frontend in production ----------
 if (process.env.NODE_ENV === "production") {
   const frontendBuildPath = path.join(__dirname, "..", "frontend", "build");
   app.use(express.static(frontendBuildPath));
 
-  // ✅ Catch-all handler for React routes (Express 5 compatible)
   app.use((req, res) => {
     res.sendFile(path.join(frontendBuildPath, "index.html"));
   });
@@ -34,7 +30,6 @@ if (process.env.NODE_ENV === "production") {
     res.send("API is running...");
   });
 }
-// -------------------------------------------------
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
