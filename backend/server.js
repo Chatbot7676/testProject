@@ -22,12 +22,12 @@ app.use("/api/registrations", registrationRoutes);
 
 // ---------- Serve frontend in production ----------
 if (process.env.NODE_ENV === "production") {
-  const frontendBuildPath = path.join(__dirname, "../frontend/build");
+  const frontendBuildPath = path.join(__dirname, "..", "frontend", "build");
   app.use(express.static(frontendBuildPath));
 
-  // serve index.html for any other route (so React Router works)
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendBuildPath, 'index.html'));
+  // ✅ Catch-all handler for React routes (Express 5 compatible)
+  app.use((req, res) => {
+    res.sendFile(path.join(frontendBuildPath, "index.html"));
   });
 } else {
   app.get("/", (req, res) => {
