@@ -17,7 +17,7 @@ function App() {
             </div>
             <div className="nav-links">
               <Link to="/" className="nav-link">
-                📤 Upload CSV
+                📊 Dashboard
               </Link>
               <Link to="/students" className="nav-link">
                 👨‍🎓 Students
@@ -25,8 +25,8 @@ function App() {
               <Link to="/instructors" className="nav-link">
                 👨‍🏫 Instructors
               </Link>
-              <Link to="/dashboard" className="nav-link">
-                📊 Dashboard
+              <Link to="/upload" className="nav-link">
+                📤 Upload CSV
               </Link>
             </div>
           </div>
@@ -34,15 +34,15 @@ function App() {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<CsvUpload />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/students" element={<Students />} />
             <Route path="/instructors" element={<Instructors />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/upload" element={<CsvUpload />} />
           </Routes>
         </main>
 
         <footer className="footer">
-          <p>© 2025 Class Scheduling System | Built with React & Node.js</p>
+          <p>© 2025 Class Scheduling System | Created by Abdulla Azizulla</p>
         </footer>
       </div>
     </Router>
