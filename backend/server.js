@@ -47,8 +47,8 @@ if (process.env.NODE_ENV === "production") {
   const frontendBuildPath = path.join(__dirname, "..", "frontend", "build");
   app.use(express.static(frontendBuildPath));
 
-  // Catch-all route for React Router (only for non-API routes)
-  app.get("*", (req, res, next) => {
+  // Catch-all route for React Router (Express 5 compatible)
+  app.get("/*", (req, res, next) => {
     // Don't serve index.html for API routes
     if (req.path.startsWith("/api")) {
       return res.status(404).json({ error: "API endpoint not found" });
