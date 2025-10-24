@@ -12,14 +12,12 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
-// Connect to MongoDB and seed database
 connectDB().then(() => {
-  seedDatabase(); // ✅ Automatically seeds on startup
+  seedDatabase(); 
 });
 
 const app = express();
 
-// CORS configuration
 const corsOptions = {
   origin: process.env.NODE_ENV === "production" 
     ? process.env.FRONTEND_URL || "https://testproject-qxlj.onrender.com"
@@ -30,7 +28,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Health check endpoint
 app.get("/health", (req, res) => {
   res.status(200).json({ 
     status: "ok", 
@@ -39,20 +36,13 @@ app.get("/health", (req, res) => {
   });
 });
 
-// API routes
 app.use("/api/registrations", registrationRoutes);
 
-// Serve frontend in production
 if (process.env.NODE_ENV === "production") {
   const frontendBuildPath = path.join(__dirname, "..", "frontend", "build");
   app.use(express.static(frontendBuildPath));
 
-  // Catch-all route for React Router (Express 5 compatible)
-  app.get("/*", (req, res, next) => {
-    // Don't serve index.html for API routes
-    if (req.path.startsWith("/api")) {
-      return res.status(404).json({ error: "API endpoint not found" });
-    }
+  app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.join(frontendBuildPath, "index.html"));
   });
 } else {
