@@ -84,11 +84,6 @@ function Instructors() {
                   <span className="detail-label">Instructor ID:</span>
                   <span className="detail-value">{instructor.instructorId}</span>
                 </div>
-                <div className="card-footer">
-                  <span className="timestamp">
-                    Added: {new Date(instructor.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
               </div>
             </div>
           ))}

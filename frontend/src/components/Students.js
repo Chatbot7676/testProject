@@ -84,11 +84,6 @@ function Students() {
                   <span className="detail-label">Student ID:</span>
                   <span className="detail-value">{student.studentId}</span>
                 </div>
-                <div className="card-footer">
-                  <span className="timestamp">
-                    Added: {new Date(student.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
               </div>
             </div>
           ))}
