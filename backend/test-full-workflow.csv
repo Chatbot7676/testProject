@@ -1,0 +1,7 @@
+Registration ID,Student ID,Instructor ID,Class ID,Class Start Time,Action
+,123,111,1,10/8/2024 13:00,new
+,124,101,2,10/9/2024 14:00,new
+,125,102,3,10/10/2024 15:00,new
+REG-1761281761755-sr5i9n482,123,102,2,10/8/2024 16:00,update
+REG-1761281761755-sr5i9n482,,,,,delete
+
